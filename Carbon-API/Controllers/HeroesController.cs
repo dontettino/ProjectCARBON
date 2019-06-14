@@ -1,6 +1,8 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Carbon_API.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carbon_API.Controllers
 {
@@ -16,16 +18,16 @@ namespace Carbon_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetHeroes()
+        public async Task<IActionResult> GetHeroes()
         {
-            var heroes = this.context.Heroes.ToList();
+            var heroes = await this.context.Heroes.ToListAsync();
             return Ok(heroes);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetHero(int id)
+        public async Task<IActionResult> GetHero(int id)
         {
-            var hero = this.context.Heroes.FirstOrDefault(x => x.Id == id);
+            var hero = await this.context.Heroes.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(hero);
         }
 
