@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Button, GlobalStyle } from "./styles/components";
+
 const App = () => {
 	function notifyMe() {
 		// Let's check if the browser supports notifications
@@ -10,7 +12,7 @@ const App = () => {
 		// Let's check whether notification permissions have already been granted
 		else if (Notification.permission === "granted") {
 			// If it's okay let's create a notification
-			var notification = new Notification("Why did you click?");
+			new Notification("Why did you click?");
 		}
 
 		// Otherwise, we need to ask the user for permission
@@ -18,7 +20,7 @@ const App = () => {
 			Notification.requestPermission().then(function(permission) {
 				// If the user accepts, let's create a notification
 				if (permission === "granted") {
-					var notification = new Notification("Why did you click?");
+					new Notification("Why did you click?");
 				}
 			});
 		}
@@ -26,10 +28,13 @@ const App = () => {
 		console.log("clicked");
 	}
 	return (
-		<div className="App">
-			<header className="App-header">
-				<button onClick={notifyMe}>DON'T CLICK THIS BUTTON!</button>
-			</header>
+		<div>
+			<GlobalStyle />
+			<div className="App">
+				<Button danger onClick={notifyMe}>
+					DON'T CLICK THIS BUTTON!
+				</Button>
+			</div>
 		</div>
 	);
 };
