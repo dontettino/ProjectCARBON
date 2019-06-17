@@ -1,0 +1,22 @@
+{
+    "type": "Grass",
+    "monster": {
+        "name": "",
+        "hp": 0,
+        "dmg": 0
+    },
+    "Description": "",
+    "info": "Nothing interesting",
+    "money": 10,
+    "resources": [
+        11,
+        15,
+        50
+    ],
+    "army": [
+        10,
+        15,
+        0
+    ],
+    "allegiance": "Neutral"
+}

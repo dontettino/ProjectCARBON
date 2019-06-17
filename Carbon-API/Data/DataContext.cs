@@ -8,5 +8,6 @@ namespace Carbon_API.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Hero> Heroes { get; set; }
+        public DbSet<Tile> Tiles { get; set; }
     }
 }

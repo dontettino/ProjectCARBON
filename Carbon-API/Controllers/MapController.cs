@@ -1,8 +1,8 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Carbon_API.Data;
+using Carbon_API.Data.DataStore.DataStoreMap;
+using Carbon_API.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Carbon_API.Controllers
 {
@@ -10,29 +10,31 @@ namespace Carbon_API.Controllers
     [ApiController]
     public class MapController : ControllerBase
     {
-        private readonly DataContext context;
-        public MapController(DataContext context)
+        private readonly IMapRepository repo;
+        public MapController(IMapRepository repo)
         {
-            this.context = context;
+            this.repo = repo;
 
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMap()
-        { 
-            var map = "";
-            return Ok(map);
+        {
+            //THIS AWFUL TRASH IS USED JUST TO TEST FRONTEND.
+            var response = this.repo.GetMap();
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMapTile()
+        public async Task<IActionResult> GetMapTile(int id)
         {
-            var tile = "";
+            var tile = repo.GetTile(id);
             return Ok(tile);
         }
 
+
         [HttpPut]
-        public async void UpdateMapTile(int id, [FromBody] string value)
+        public void UpdateMapTile(int id, [FromBody] string value)
         {
 
         }

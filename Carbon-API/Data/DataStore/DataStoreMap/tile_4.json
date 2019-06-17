@@ -1,0 +1,22 @@
+{
+    "type": "Town",
+    "monster": {
+        "name": "Rat",
+        "hp": 100,
+        "dmg": 20
+    },
+    "Description": "",
+    "info": "Nothing interesting",
+    "money": 10,
+    "resources": [
+        11,
+        15,
+        50
+    ],
+    "army": [
+        10,
+        15,
+        0
+    ],
+    "allegiance": "Enemy"
+}
