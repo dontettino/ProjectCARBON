@@ -1,8 +1,6 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Carbon_API.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Carbon_API.Controllers
 {
@@ -19,9 +17,9 @@ namespace Carbon_API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetBuildings()
-        { 
+        {
             var town = "";
-            return Ok(map);
+            return Ok(town);
         }
 
         [HttpGet("{id}")]
