@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
 using Carbon_API.Data;
-using Carbon_API.Data.DataStore.DataStoreMap;
-using Carbon_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Carbon_API.Controllers
 {
@@ -11,9 +10,11 @@ namespace Carbon_API.Controllers
     public class MapController : ControllerBase
     {
         private readonly IMapRepository repo;
-        public MapController(IMapRepository repo)
+        private readonly ILogger logger;
+        public MapController(IMapRepository repo, ILogger<MapController> logger)
         {
             this.repo = repo;
+            this.logger = logger;
 
         }
 
@@ -22,13 +23,14 @@ namespace Carbon_API.Controllers
         {
             //THIS AWFUL TRASH IS USED JUST TO TEST FRONTEND.
             var response = this.repo.GetMap();
+            logger.LogDebug("Map was loaded.");
             return Ok(response);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMapTile(int id)
         {
-            var tile = repo.GetTile(id);
+            var tile = this.repo.GetTile(id);
             return Ok(tile);
         }
 
