@@ -20,25 +20,25 @@ namespace Carbon_API.General
             army.Add("Cavalry", 0);
         }
 
-        public Army(int a, int i, int c)
+        public Army(int[] army)
         {
-            SetArmy(a, i, c);
+            SetArmy(army);
         }
 
         public bool IsArmyDefeated()
         {
             bool defeat = true;
             if (army["Archer"] <= 0) { defeat = false; }
-            if (army["Infantry"] != 0) { defeat = false; }
-            if (army["Cavalry"] != 0) { defeat = false; }
+            if (army["Infantry"] <= 0) { defeat = false; }
+            if (army["Cavalry"] <= 0) { defeat = false; }
             return defeat;
         }
 
-        public void SetArmy(int a, int i, int c)
+        public void SetArmy(int[] army)
         {
-            army["Archer"] = (a < 0) ? 0 : a;
-            army["Infantry"] = (i < 0) ? 0 : i;
-            army["Cavalry"] = (c < 0) ? 0 : c;
+            this.army["Archer"] = (army[0] < 0) ? 0 : army[0];
+            this.army["Infantry"] = (army[1] < 0) ? 0 : army[1];
+            this.army["Cavalry"] = (army[2] < 0) ? 0 : army[2];
         }
 
         public int[] DamageArmyFor(int damage)
