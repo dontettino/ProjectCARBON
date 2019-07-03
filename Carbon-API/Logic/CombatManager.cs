@@ -1,3 +1,4 @@
+using Carbon_API.Dtos;
 using Carbon_API.General;
 
 namespace Carbon_API.Logic
@@ -13,21 +14,16 @@ namespace Carbon_API.Logic
             this.defendArmy = defendArmy;
         }
 
-        public void Raid()
+        private void Raid()
         {
-            //int[] ha = new int[] { attackArmy.army["Archer"], attackArmy.army["Infantry"], attackArmy.army["Cavalry"] };
-            //int[] ea = new int[] { defendArmy.army["Archer"], defendArmy.army["Infantry"], defendArmy.army["Cavalry"] };
             int attackDamage = attackArmy.GetArmyDamage();
             int defendDamage = defendArmy.GetArmyDamage();
 
-            int[] defendLoss = defendArmy.DamageArmyFor(attackDamage);
-            int[] attackLoss = attackArmy.DamageArmyFor(defendDamage);
-
-            //return
-
+            defendArmy = defendArmy.DamageArmyFor(attackDamage);
+            attackArmy = attackArmy.DamageArmyFor(defendDamage);
         }
 
-        public void Conquer()
+        private void Conquer()
         {
             for (; ; )
             {
@@ -39,11 +35,30 @@ namespace Carbon_API.Logic
                 {
                     Raid();
                 }
-
             }
+        }
 
-            // Implement actions to save outcome or return it
+        public CombatResultDto PerformCombat(string combatType)
+        {
 
+            CombatResultDto result = new CombatResultDto();
+            if (combatType == "Raid")
+                switch (combatType)
+                {
+                    case "Raid":
+                        result.CombatType = "Raid";
+                        Raid();
+
+                        break;
+                    case "Conquer":
+                        Conquer();
+                        result.CombatType = "Conquer";
+                        break;
+                }
+            result.AttackArmyState = attackArmy;
+            result.DefendArmyState = defendArmy;
+
+            return result;
         }
     }
 }

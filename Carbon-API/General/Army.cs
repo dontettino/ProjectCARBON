@@ -40,15 +40,18 @@ namespace Carbon_API.General
             this.army["Infantry"] = (army[1] < 0) ? 0 : army[1];
             this.army["Cavalry"] = (army[2] < 0) ? 0 : army[2];
         }
-
-        public int[] DamageArmyFor(int damage)
+        /*
+        @damage holds value of damage that should be distributed across whole army
+        @return returns Army object that holds actual state of army after it was damaged
+         */
+        public Army DamageArmyFor(int damage)
         {
             float dmgShare = (float)damage / 3;
             int a = DamageArchersFor(Convert.ToInt32(Math.Ceiling(dmgShare)));
             int i = DamageInfantryFor(Convert.ToInt32(Math.Ceiling(dmgShare)));
             int c = DamageCavalryFor(Convert.ToInt32(Math.Ceiling(dmgShare)));
 
-            return new int[] { a, i, c };
+            return new Army(new int[] { a, i, c });
         }
 
         public int DamageArchersFor(int damage)

@@ -18,17 +18,13 @@ namespace Carbon_API.Controllers
             var defendArmy = new Army(combatDto.DefArmy);
             var combatManager = new CombatManager(attackArmy, defendArmy);
 
-            if (combatDto.CombatType == "Raid")
+            try
             {
-                combatManager.Raid();
+                combatManager.PerformCombat(combatDto.CombatType);
             }
-            else if (combatDto.CombatType == "Conquer")
+            catch (Exception ex)
             {
-                combatManager.Conquer();
-            }
-            else
-            {
-                throw new ArgumentException();
+                return BadRequest("Invalid combat type");
             }
             var response = combatDto.CombatType + combatDto.AtkArmy[2] + combatDto.DefArmy[1];
 
